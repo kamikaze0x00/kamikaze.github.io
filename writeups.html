@@ -104,6 +104,12 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-primary);
+            z-index: 100;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .filter-tags {
@@ -161,6 +167,21 @@
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
+        }
+        
+        .writeups-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+        
+        .writeups-grid.list-view .writeup-card {
+            flex-direction: row;
+            height: auto;
+        }
+        
+        .writeups-grid.list-view .card-image {
+            width: 250px;
+            height: 200px;
+            flex-shrink: 0;
         }
         
         .writeup-card {
@@ -352,6 +373,14 @@
             box-shadow: 0 10px 25px rgba(255, 0, 60, 0.3);
         }
         
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 1024px) {
             .writeups-grid {
@@ -363,8 +392,17 @@
             }
             
             .featured-writeup .card-image {
-                height: 150px;
+                height: 250px;
                 border-radius: 10px 10px 0 0;
+            }
+            
+            .writeups-grid.list-view .writeup-card {
+                flex-direction: column;
+            }
+            
+            .writeups-grid.list-view .card-image {
+                width: 100%;
+                height: 200px;
             }
         }
         
@@ -376,6 +414,7 @@
             .filter-section {
                 flex-direction: column;
                 align-items: flex-start;
+                position: static;
             }
             
             .view-options {
@@ -466,10 +505,12 @@
         <h1>CTF Writeups</h1>
         <p>Detailed solutions and walkthroughs for various Capture The Flag challenges</p>
         <div class="search-box">
-            <input type="text" class="search-input" placeholder="Search writeups...">
-            <button class="search-button">
-                <i class="fas fa-search"></i>
-            </button>
+            <form id="search-form">
+                <input type="text" class="search-input" id="search-input" placeholder="Search writeups...">
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
     </section>
 
@@ -477,32 +518,32 @@
     <main class="writeups-container">
         <div class="filter-section">
             <div class="filter-tags">
-                <div class="filter-tag active">All</div>
-                <div class="filter-tag">TryHackMe</div>
-                <div class="filter-tag">HackTheBox</div>
-                <div class="filter-tag">Binary</div>
-                <div class="filter-tag">Web</div>
-                <div class="filter-tag">Forensics</div>
-                <div class="filter-tag">Crypto</div>
-                <div class="filter-tag">Mobile</div>
-                <div class="filter-tag">AI</div>
-                <div class="filter-tag">IoT</div>
-                <div class="filter-tag">Reversing</div>
+                <div class="filter-tag active" data-filter="all">All</div>
+                <div class="filter-tag" data-filter="TryHackMe">TryHackMe</div>
+                <div class="filter-tag" data-filter="HackTheBox">HackTheBox</div>
+                <div class="filter-tag" data-filter="Binary">Binary</div>
+                <div class="filter-tag" data-filter="Web">Web</div>
+                <div class="filter-tag" data-filter="Forensics">Forensics</div>
+                <div class="filter-tag" data-filter="Crypto">Crypto</div>
+                <div class="filter-tag" data-filter="Mobile">Mobile</div>
+                <div class="filter-tag" data-filter="AI">AI</div>
+                <div class="filter-tag" data-filter="IoT">IoT</div>
+                <div class="filter-tag" data-filter="Reversing">Reversing</div>
             </div>
             
             <div class="view-options">
-                <div class="view-option active">
+                <div class="view-option active" data-view="grid">
                     <i class="fas fa-grip-horizontal"></i>
                 </div>
-                <div class="view-option">
+                <div class="view-option" data-view="list">
                     <i class="fas fa-list"></i>
                 </div>
             </div>
         </div>
 
-        <div class="writeups-grid">
+        <div class="writeups-grid" id="writeups-grid">
             <!-- Featured Writeup -->
-            <article class="writeup-card featured-writeup">
+            <article class="writeup-card featured-writeup" data-platform="TryHackMe" data-tags="Enumeration PrivEsc WebApp">
                 <div class="card-image">
                     <i class="fas fa-star"></i>
                     <div class="card-difficulty">Advanced</div>
@@ -530,7 +571,7 @@
             </article>
 
             <!-- Regular Writeups -->
-            <article class="writeup-card">
+            <article class="writeup-card" data-platform="HackTheBox" data-tags="Linux PrivEsc">
                 <div class="card-image">
                     <i class="fas fa-terminal"></i>
                     <div class="card-difficulty">Medium</div>
@@ -555,7 +596,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card">
+            <article class="writeup-card" data-platform="CTF" data-tags="Binary Exploitation">
                 <div class="card-image">
                     <i class="fas fa-bug"></i>
                     <div class="card-difficulty">Hard</div>
@@ -573,14 +614,14 @@
                     </div>
                     <div class="card-actions">
                         <span class="read-time">20 min read</span>
-                        <a href="writeups/lame.html" class="card-button" target="_blank">
+                        <a href="https://yourblog.com/buffer-overflow-guide" class="card-button" target="_blank">
                             Read <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
             </article>
 
-            <article class="writeup-card">
+            <article class="writeup-card" data-platform="Web" data-tags="Web SQLi">
                 <div class="card-image">
                     <i class="fas fa-database"></i>
                     <div class="card-difficulty">Medium</div>
@@ -605,7 +646,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card">
+            <article class="writeup-card" data-platform="Forensics" data-tags="Forensics Wireshark">
                 <div class="card-image">
                     <i class="fas fa-network-wired"></i>
                     <div class="card-difficulty">Easy</div>
@@ -630,7 +671,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card">
+            <article class="writeup-card" data-platform="Linux" data-tags="Linux PrivEsc">
                 <div class="card-image">
                     <i class="fas fa-shield-alt"></i>
                     <div class="card-difficulty">Medium</div>
@@ -657,7 +698,7 @@
         </div>
 
         <div class="load-more">
-            <button class="load-more-button">
+            <button class="load-more-button" id="load-more">
                 Load More Writeups <i class="fas fa-sync-alt"></i>
             </button>
         </div>
@@ -732,27 +773,100 @@
             
             // Filter tags functionality
             const filterTags = document.querySelectorAll('.filter-tag');
+            let activeFilter = 'all';
+            
             filterTags.forEach(tag => {
                 tag.addEventListener('click', function() {
+                    const filterValue = this.getAttribute('data-filter');
                     filterTags.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
+                    activeFilter = filterValue;
+                    filterWriteups();
                 });
             });
             
             // View options functionality
             const viewOptions = document.querySelectorAll('.view-option');
+            const writeupsGrid = document.getElementById('writeups-grid');
+            
             viewOptions.forEach(option => {
                 option.addEventListener('click', function() {
+                    const viewType = this.getAttribute('data-view');
                     viewOptions.forEach(o => o.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    if (viewType === 'list') {
+                        writeupsGrid.classList.add('list-view');
+                    } else {
+                        writeupsGrid.classList.remove('list-view');
+                    }
                 });
             });
             
+            // Search functionality
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+            
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                filterWriteups();
+            });
+            
+            searchInput.addEventListener('input', function() {
+                filterWriteups();
+            });
+            
+            // Filter writeups based on active filter and search term
+            function filterWriteups() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const writeupCards = document.querySelectorAll('.writeup-card');
+                let visibleCount = 0;
+                
+                writeupCards.forEach(card => {
+                    const platform = card.getAttribute('data-platform');
+                    const tags = card.getAttribute('data-tags').toLowerCase();
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
+                    
+                    // Check if card matches filter
+                    const matchesFilter = activeFilter === 'all' || platform === activeFilter;
+                    
+                    // Check if card matches search term
+                    const matchesSearch = searchTerm === '' || 
+                        title.includes(searchTerm) || 
+                        excerpt.includes(searchTerm) || 
+                        tags.includes(searchTerm);
+                    
+                    // Show or hide card based on filters
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show no results message if needed
+                let noResults = document.getElementById('no-results');
+                if (visibleCount === 0) {
+                    if (!noResults) {
+                        noResults = document.createElement('div');
+                        noResults.id = 'no-results';
+                        noResults.className = 'no-results';
+                        noResults.innerHTML = '<i class="fas fa-search fa-2x"></i><h3>No writeups found</h3><p>Try adjusting your search or filter criteria</p>';
+                        writeupsGrid.appendChild(noResults);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            }
+            
             // Load more button functionality
-            const loadMoreBtn = document.querySelector('.load-more-button');
+            const loadMoreBtn = document.getElementById('load-more');
             if (loadMoreBtn) {
                 loadMoreBtn.addEventListener('click', function() {
                     this.innerHTML = 'Loading... <i class="fas fa-circle-notch fa-spin"></i>';
+                    // Simulate loading more content
                     setTimeout(() => {
                         this.innerHTML = 'No More Writeups <i class="fas fa-check"></i>';
                         this.disabled = true;
