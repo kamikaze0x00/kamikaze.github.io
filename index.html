@@ -3,83 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>DarkRed | Modern Website</title>
     <link href="https://cdn.jsdelivr.net/npm/[email protected]/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/[email protected]/devicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #0d6efd;
-            --secondary-color: #6c757d;
-            --dark-color: #212529;
-            --light-color: #f8f9fa;
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-red: #ff003c;
+            --dark-red: #8b0000;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
         }
         
         body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--dark-color);
+            overflow-x: hidden;
         }
         
+        /* Navigation */
         .navbar {
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(255, 0, 60, 0.2);
+            padding: 15px 0;
         }
         
+        .navbar-brand {
+            color: var(--accent-red) !important;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary) !important;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-red) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
             text-align: center;
+            position: relative;
         }
         
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff003c, #8b0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(255, 0, 60, 0.4);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 60, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 0, 60, 0.5);
+            background: linear-gradient(45deg, var(--dark-red), var(--accent-red));
+        }
+        
+        /* Sections */
         .section-padding {
-            padding: 80px 0;
+            padding: 100px 0;
         }
         
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
         }
         
-        .project-card {
-            transition: transform 0.3s ease;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
+        }
+        
+        /* About Section */
+        .about-content {
+            background-color: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(255, 0, 60, 0.1);
+            border-left: 4px solid var(--accent-red);
+        }
+        
+        /* Services Section */
+        .service-card {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
             height: 100%;
+            border-bottom: 3px solid transparent;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 3px solid var(--accent-red);
+            box-shadow: 0 10px 30px rgba(255, 0, 60, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-red);
+            margin-bottom: 20px;
+        }
+        
+        /* Portfolio Section */
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 0, 60, 0.8), rgba(139, 0, 0, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            background-color: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(255, 0, 60, 0.1);
+        }
+        
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            color: var(--text-primary);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 60, 0.25);
+            color: var(--text-primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #080808;
+            padding: 60px 0 30px;
+        }
+        
+        .social-links {
+            margin-bottom: 30px;
         }
         
         .social-links a {
-            color: var(--secondary-color);
-            font-size: 1.5rem;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
             margin: 0 10px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
         
         .social-links a:hover {
-            color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 60, 0.4);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">YourName</a>
+            <a class="navbar-brand" href="#">DarkRed</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
+                        <a class="nav-link" href="#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#skills">Skills</a>
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -90,131 +301,134 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="display-3 fw-bold mb-3">Your Name</h1>
-            <p class="lead mb-4">Job Title or Brief Description</p>
-            <a href="#projects" class="btn btn-light btn-lg">View My Work</a>
+    <section id="home" class="hero-section">
+        <div class="container hero-content">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">DARK RED STUDIOS</h1>
+                    <p class="hero-subtitle">Creating digital experiences with passion and precision</p>
+                    <a href="#contact" class="btn btn-primary btn-lg pulse">Get Started</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section-padding">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold mb-4">About Me</h2>
-                    <p>Hello! I'm [Your Name], a [your profession] passionate about [your interests].</p>
-                    <p>I have experience in [your skills/technologies] and enjoy working on [types of projects].</p>
-                    <p>When I'm not coding, you can find me [your hobbies/interests].</p>
-                </div>
-                <div class="col-lg-6">
-                    <img src="https://via.placeholder.com/400x400" alt="Profile Picture" class="img-fluid rounded-circle">
+            <h2 class="section-title">About Us</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="about-content">
+                        <p>We are a creative studio focused on building innovative digital solutions. Our team combines design thinking with technical expertise to create memorable experiences.</p>
+                        <p>With years of experience in the industry, we've developed a unique approach that balances aesthetics with functionality, always keeping the end user in mind.</p>
+                        <p>Our passion for technology and design drives us to push boundaries and explore new possibilities in the digital landscape.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section-padding bg-light">
+    <!-- Services Section -->
+    <section id="services" class="section-padding bg-dark">
         <div class="container">
-            <h2 class="text-center fw-bold mb-5">My Projects</h2>
+            <h2 class="section-title">Our Services</h2>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="card project-card">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Project 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Name 1</h5>
-                            <p class="card-text">Brief description of the project and what it does.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-primary">Technology 1</span>
-                                <span class="badge bg-primary">Technology 2</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary">View Project</a>
-                        </div>
+                    <div class="service-card">
+                        <i class="fas fa-code service-icon"></i>
+                        <h3>Web Development</h3>
+                        <p>Custom websites and web applications built with modern technologies and best practices.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card project-card">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Project 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Name 2</h5>
-                            <p class="card-text">Brief description of the project and what it does.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-primary">Technology 1</span>
-                                <span class="badge bg-primary">Technology 2</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary">View Project</a>
-                        </div>
+                    <div class="service-card">
+                        <i class="fas fa-paint-brush service-icon"></i>
+                        <h3>UI/UX Design</h3>
+                        <p>User-centered design solutions that enhance engagement and improve user experience.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card project-card">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Project 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Name 3</h5>
-                            <p class="card-text">Brief description of the project and what it does.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-primary">Technology 1</span>
-                                <span class="badge bg-primary">Technology 2</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary">View Project</a>
-                        </div>
+                    <div class="service-card">
+                        <i class="fas fa-mobile-alt service-icon"></i>
+                        <h3>App Development</h3>
+                        <p>Native and cross-platform mobile applications for iOS and Android devices.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section-padding">
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section-padding">
         <div class="container">
-            <h2 class="text-center fw-bold mb-5">Skills & Technologies</h2>
-            <div class="row text-center">
-                <div class="col-4 col-md-2 mb-4">
-                    <i class="devicon-python-plain colored skill-icon"></i>
-                    <p>Python</p>
+            <h2 class="section-title">Our Work</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300/1a1a1a/ff003c?text=Project+1" alt="Project 1" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-text">
+                                <h3>Project One</h3>
+                                <p>Web Design</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-4 col-md-2 mb-4">
-                    <i class="devicon-javascript-plain colored skill-icon"></i>
-                    <p>JavaScript</p>
+                <div class="col-md-6 col-lg-4">
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300/1a1a1a/ff003c?text=Project+2" alt="Project 2" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-text">
+                                <h3>Project Two</h3>
+                                <p>Mobile App</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-4 col-md-2 mb-4">
-                    <i class="devicon-html5-plain colored skill-icon"></i>
-                    <p>HTML5</p>
-                </div>
-                <div class="col-4 col-md-2 mb-4">
-                    <i class="devicon-css3-plain colored skill-icon"></i>
-                    <p>CSS3</p>
-                </div>
-                <div class="col-4 col-md-2 mb-4">
-                    <i class="devicon-git-plain colored skill-icon"></i>
-                    <p>Git</p>
-                </div>
-                <div class="col-4 col-md-2 mb-4">
-                    <i class="devicon-docker-plain colored skill-icon"></i>
-                    <p>Docker</p>
+                <div class="col-md-6 col-lg-4">
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300/1a1a1a/ff003c?text=Project+3" alt="Project 3" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-text">
+                                <h3>Project Three</h3>
+                                <p>Brand Identity</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section-padding bg-light">
+    <section id="contact" class="section-padding bg-dark">
         <div class="container">
-            <h2 class="text-center fw-bold mb-5">Get In Touch</h2>
+            <h2 class="section-title">Get In Touch</h2>
             <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <p class="card-text">I'm always interested in new opportunities and interesting projects.</p>
-                            <a href="mailto:[email protected]" class="btn btn-primary btn-lg mt-3">Send Email</a>
-                            <div class="social-links mt-5">
-                                <a href="#" title="GitHub"><i class="devicon-github-plain"></i></a>
-                                <a href="#" title="LinkedIn"><i class="devicon-linkedin-plain"></i></a>
-                                <a href="#" title="Twitter"><i class="devicon-twitter-plain"></i></a>
+                <div class="col-lg-8">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Your Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Your Email" required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -222,12 +436,103 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-4 bg-dark text-white">
+    <footer>
         <div class="container text-center">
-            <p class="mb-0">© 2025 Your Name. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2025 DarkRed Studios. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.padding = '10px 0';
+            } else {
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.padding = '15px 0';
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation
+            const inputs = this.querySelectorAll('input, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = 'var(--accent-red)';
+                } else {
+                    input.style.borderColor = 'rgba(255, 0, 60, 0.3)';
+                }
+            });
+            
+            if (isValid) {
+                // Form is valid - in a real application, you would send data to a server here
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-card, .portfolio-item');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                
+                // If element is in viewport
+                if(position.top < window.innerHeight && position.bottom >= 0) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize animation styles
+        document.querySelectorAll('.service-card, .portfolio-item').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.5s ease';
+        });
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        // Initial check in case elements are already in view
+        window.addEventListener('load', animateOnScroll);
+    </script>
 </body>
 </html>
