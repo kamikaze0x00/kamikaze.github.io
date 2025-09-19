@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamikaze0x00 - CTF Writeups & Security Research</title>
+    <title>KAMIKAZE0x00 | Elite Security Research</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/terminal.css">
+    <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Matrix Background -->
+    <canvas id="matrix-background"></canvas>
+    
     <!-- Terminal Background Animation -->
     <div id="terminal-background"></div>
 
     <!-- Header -->
     <header>
         <div class="header-container">
-            <div class="logo">KAMIKAZE<span>0x00</span></div>
+            <div class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">KAMIKAZE<span class="logo-accent">0x00</span></span>
+                <span class="logo-bracket">]</span>
+            </div>
             <div class="menu-toggle">
                 <span></span>
                 <span></span>
@@ -23,11 +32,11 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li><a href="writeups.html" class="nav-link">Writeups</a></li>
-                    <li><a href="categories.html" class="nav-link">Categories</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="index.html" class="nav-link active"><span class="nav-number">01.</span> Home</a></li>
+                    <li><a href="writeups.html" class="nav-link"><span class="nav-number">02.</span> Writeups</a></li>
+                    <li><a href="categories.html" class="nav-link"><span class="nav-number">03.</span> Categories</a></li>
+                    <li><a href="about.html" class="nav-link"><span class="nav-number">04.</span> About</a></li>
+                    <li><a href="contact.html" class="nav-link"><span class="nav-number">05.</span> Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -35,127 +44,227 @@
 
     <!-- Main Content -->
     <main class="page-content">
-        <div class="hero">
+        <!-- Hero Section -->
+        <section class="hero">
             <div class="hero-content">
-                <h1>CTF Writeups & Security Research</h1>
-                <p>Detailed walkthroughs of hacking challenges, CTF solutions, and security tutorials</p>
-                <a href="writeups.html" class="btn pulse">Explore Writeups</a>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="post-list">
-                <article class="post-card">
-                    <div class="post-meta">
-                        <span class="post-date">2025-09-15</span>
-                        <div class="post-tags">
-                            <span class="tag tag-ctf">CTF</span>
-                            <span class="tag tag-walkthrough">Walkthrough</span>
-                            <span class="tag">TryHackMe</span>
-                        </div>
-                    </div>
-                    <h2><a href="#">TryHackMe - Blog CTF Complete Walkthrough</a></h2>
-                    <p class="post-excerpt">A detailed walkthrough of the Blog CTF room on TryHackMe, covering enumeration, exploitation, and privilege escalation techniques.</p>
-                    <pre><code># Nmap scan results
-nmap -sS -p- -n -Pn --min-rate=9362 $IP
-PORT    STATE SERVICE
-22/tcp  open  ssh
-80/tcp  open  http
-139/tcp open  netbios-ssn
-445/tcp open  netbios-ssn</code></pre>
-                    <a href="#" class="read-more">Read Complete Writeup →</a>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-meta">
-                        <span class="post-date">2025-09-10</span>
-                        <div class="post-tags">
-                            <span class="tag tag-ctf">CTF</span>
-                            <span class="tag">HackTheBox</span>
-                            <span class="tag">Privilege Escalation</span>
-                        </div>
-                    </div>
-                    <h2><a href="#">HackTheBox - SneakyMailer Writeup</a></h2>
-                    <p class="post-excerpt">Solving the SneakyMailer machine on HackTheBox through SMTP enumeration, phishing, and Linux privilege escalation.</p>
-                    <a href="#" class="read-more">Read Complete Writeup →</a>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-meta">
-                        <span class="post-date">2025-09-05</span>
-                        <div class="post-tags">
-                            <span class="tag tag-ctf">CTF</span>
-                            <span class="tag">Binary Exploitation</span>
-                            <span class="tag">Buffer Overflow</span>
-                        </div>
-                    </div>
-                    <h2><a href="#">Buffer Overflow Fundamentals for CTFs</a></h2>
-                    <p class="post-excerpt">A beginner's guide to understanding and exploiting buffer overflow vulnerabilities in CTF challenges.</p>
-                    <a href="#" class="read-more">Read Complete Writeup →</a>
-                </article>
-
-                <div class="pagination">
-                    <a href="#" class="page-link current">1</a>
-                    <a href="#" class="page-link">2</a>
-                    <a href="#" class="page-link">3</a>
-                    <a href="#" class="page-link">Next →</a>
+                <div class="hero-quote">
+                    <div class="quote-icon">"</div>
+                    <p class="quote-text">The quieter you become, the more you are able to hear.</p>
+                    <p class="quote-author">— Unknown hacker</p>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-line">Cybersecurity</span>
+                    <span class="title-line">Researcher &</span>
+                    <span class="title-line accent">CTF Specialist</span>
+                </h1>
+                
+                <p class="hero-description">
+                    I explore digital systems, uncover vulnerabilities, and share knowledge through detailed 
+                    writeups and security research. Welcome to my repository of hacking methodologies and 
+                    cybersecurity insights.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="writeups.html" class="btn btn-primary">
+                        <span>Explore Writeups</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="about.html" class="btn btn-secondary">
+                        <span>About Me</span>
+                    </a>
                 </div>
             </div>
-
-            <aside class="sidebar">
-                <div class="sidebar-widget about-me">
-                    <h3>About Me</h3>
-                    <p>Security researcher and CTF player focused on penetration testing, reverse engineering, and exploit development.</p>
-                    <div class="social-links">
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="HTB"><i class="fab fa-hackerrank"></i></a>
+            
+            <div class="hero-terminal">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn close"></span>
+                            <span class="terminal-btn minimize"></span>
+                            <span class="terminal-btn maximize"></span>
+                        </div>
+                        <div class="terminal-title">kamikaze@0x00:~</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> whoami</div>
+                        <div class="terminal-line output">security_researcher | ctf_player | exploit_developer</div>
+                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> cat skills.txt</div>
+                        <div class="terminal-line output">Binary Exploitation | Web Security | Reverse Engineering</div>
+                        <div class="terminal-line output">Privilege Escalation | Cryptography | Forensics</div>
+                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> <span class="cursor">█</span></div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="sidebar-widget categories">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li><a href="categories.html">TryHackMe <span class="category-count">12</span></a></li>
-                        <li><a href="categories.html">HackTheBox <span class="category-count">8</span></a></li>
-                        <li><a href="categories.html">Binary Exploitation <span class="category-count">5</span></a></li>
-                        <li><a href="categories.html">Web Security <span class="category-count">7</span></a></li>
-                        <li><a href="categories.html">Privilege Escalation <span class="category-count">9</span></a></li>
-                        <li><a href="categories.html">Forensics <span class="category-count">4</span></a></li>
-                    </ul>
-                </div>
+        <!-- Featured Writeups Section -->
+        <section class="featured-section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Writeups</h2>
+                <a href="writeups.html" class="section-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="writeups-grid">
+                <article class="writeup-card">
+                    <div class="writeup-header">
+                        <span class="writeup-date">2025-09-15</span>
+                        <span class="writeup-difficulty advanced">Advanced</span>
+                    </div>
+                    <h3 class="writeup-title">TryHackMe - Blog CTF Complete Walkthrough</h3>
+                    <p class="writeup-excerpt">A detailed walkthrough of the Blog CTF room covering enumeration, exploitation, and privilege escalation techniques.</p>
+                    <div class="writeup-tags">
+                        <span class="tag">TryHackMe</span>
+                        <span class="tag">PrivEsc</span>
+                        <span class="tag">Web App</span>
+                    </div>
+                    <a href="#" class="writeup-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+                </article>
+                
+                <article class="writeup-card">
+                    <div class="writeup-header">
+                        <span class="writeup-date">2025-09-10</span>
+                        <span class="writeup-difficulty intermediate">Intermediate</span>
+                    </div>
+                    <h3 class="writeup-title">HackTheBox - SneakyMailer Writeup</h3>
+                    <p class="writeup-excerpt">Solving the SneakyMailer machine through SMTP enumeration, phishing, and Linux privilege escalation.</p>
+                    <div class="writeup-tags">
+                        <span class="tag">HackTheBox</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">SMTP</span>
+                    </div>
+                    <a href="#" class="writeup-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+                </article>
+                
+                <article class="writeup-card">
+                    <div class="writeup-header">
+                        <span class="writeup-date">2025-09-05</span>
+                        <span class="writeup-difficulty advanced">Advanced</span>
+                    </div>
+                    <h3 class="writeup-title">Buffer Overflow Fundamentals for CTFs</h3>
+                    <p class="writeup-excerpt">Comprehensive guide to understanding and exploiting buffer overflow vulnerabilities in CTF challenges.</p>
+                    <div class="writeup-tags">
+                        <span class="tag">Binary</span>
+                        <span class="tag">Exploitation</span>
+                        <span class="tag">x86</span>
+                    </div>
+                    <a href="#" class="writeup-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </section>
 
-                <div class="sidebar-widget recent-posts">
-                    <h3>Recent Posts</h3>
-                    <ul>
-                        <li><a href="#">TryHackMe - Blog CTF Complete Walkthrough</a> <span class="recent-post-date">2025-09-15</span></li>
-                        <li><a href="#">HackTheBox - SneakyMailer Writeup</a> <span class="recent-post-date">2025-09-10</span></li>
-                        <li><a href="#">Buffer Overflow Fundamentals for CTFs</a> <span class="recent-post-date">2025-09-05</span></li>
-                        <li><a href="#">Windows Privilege Escalation Techniques</a> <span class="recent-post-date">2025-08-28</span></li>
-                        <li><a href="#">SQL Injection Mastery Guide</a> <span class="recent-post-date">2025-08-20</span></li>
-                    </ul>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="42">0</div>
+                        <div class="stat-label">Writeups Published</div>
+                    </div>
                 </div>
-            </aside>
-        </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="127">0</div>
+                        <div class="stat-label">Machines Compromised</div>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">CTFs Participated</div>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="8">0</div>
+                        <div class="stat-label">CVEs Discovered</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <div class="quote-container">
+                <div class="quote-icon">"</div>
+                <p class="quote-text">The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.</p>
+                <p class="quote-author">— Eric Schmidt</p>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="writeups.html">Writeups</a>
-                <a href="categories.html">Categories</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-bracket">[</span>
+                        <span class="logo-text">KAMIKAZE<span class="logo-accent">0x00</span></span>
+                        <span class="logo-bracket">]</span>
+                    </div>
+                    <p class="footer-description">Cybersecurity researcher & CTF specialist focused on offensive security and vulnerability research.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="writeups.html">Writeups</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="categories.html">TryHackMe</a></li>
+                        <li><a href="categories.html">HackTheBox</a></li>
+                        <li><a href="categories.html">Binary Exploitation</a></li>
+                        <li><a href="categories.html">Web Security</a></li>
+                        <li><a href="categories.html">Privilege Escalation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="HTB"><i class="fas fa-cube"></i></a>
+                        <a href="#" title="TryHackMe"><i class="fas fa-laptop-code"></i></a>
+                    </div>
+                    <p class="footer-email">kamikaze0x00@protonmail.com</p>
+                </div>
             </div>
-            <div class="copyright">
-                &copy; 2025 Kamikaze0x00. All rights reserved.
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 KAMIKAZE0x00. All rights reserved.</p>
+                <p class="footer-quote">"The only secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards." — Gene Spafford</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/matrix.js"></script>
+    <script src="js/terminal.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
