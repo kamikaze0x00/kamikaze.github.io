@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAMIKAZE0x00 | Elite Security Research</title>
+    <title>KAMIKAZE0x00 | Security Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/terminal.css">
@@ -47,21 +47,14 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <div class="hero-quote">
-                    <div class="quote-icon">"</div>
-                    <p class="quote-text">The quieter you become, the more you are able to hear.</p>
-                    <p class="quote-author">— Unknown hacker</p>
-                </div>
-                
                 <h1 class="hero-title">
-                    <span class="title-line">Cybersecurity</span>
-                    <span class="title-line">Researcher &</span>
-                    <span class="title-line accent">CTF Specialist</span>
+                    <span class="title-line">Security Research</span>
+                    <span class="title-line accent">& Technical Exploration</span>
                 </h1>
                 
                 <p class="hero-description">
-                    Sharing detailed walkthroughs of CTF challenges I solve, highlighting practical exploitation, enumeration, and post-exploitation techniques. 
-                    A resource for hands-on methodologies and real-world hacking insights.
+                    Exploring systems, uncovering vulnerabilities, and documenting findings through
+                    detailed technical writeups and security analysis.
                 </p>
                 
                 <div class="hero-actions">
@@ -69,8 +62,8 @@
                         <span>Explore Writeups</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="about.html" class="btn btn-secondary">
-                        <span>About Me</span>
+                    <a href="categories.html" class="btn btn-secondary">
+                        <span>View Categories</span>
                     </a>
                 </div>
             </div>
@@ -86,13 +79,44 @@
                         <div class="terminal-title">kamikaze@0x00:~</div>
                     </div>
                     <div class="terminal-content">
-                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> whoami</div>
-                        <div class="terminal-line output">security_researcher | ctf_player | exploit_developer</div>
-                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> cat skills.txt</div>
-                        <div class="terminal-line output">Binary Exploitation | Web Security | Reverse Engineering</div>
-                        <div class="terminal-line output">Privilege Escalation | Cryptography | Forensics</div>
+                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> system_status --check</div>
+                        <div class="terminal-line output">Blog system: ONLINE | Writeups: 42 | Categories: 12</div>
+                        <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> recent_activity --show</div>
+                        <div class="terminal-line output">Last update: 2025-09-15 | New writeups: 3</div>
                         <div class="terminal-line"><span class="prompt">kamikaze@0x00:~$</span> <span class="cursor">█</span></div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Stats Section -->
+        <section class="interactive-section">
+            <div class="interactive-grid">
+                <div class="interactive-item" data-action="scan">
+                    <div class="interactive-icon">
+                        <i class="fas fa-radar"></i>
+                    </div>
+                    <h3>Network Analysis</h3>
+                    <p>Explore network scanning techniques and tools</p>
+                    <button class="interactive-btn">Launch Scan</button>
+                </div>
+                
+                <div class="interactive-item" data-action="encrypt">
+                    <div class="interactive-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Cryptography</h3>
+                    <p>Learn about encryption and decryption methods</p>
+                    <button class="interactive-btn">Encrypt Text</button>
+                </div>
+                
+                <div class="interactive-item" data-action="exploit">
+                    <div class="interactive-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Vulnerability Research</h3>
+                    <p>Discover and analyze security vulnerabilities</p>
+                    <button class="interactive-btn">Analyze Code</button>
                 </div>
             </div>
         </section>
@@ -100,7 +124,7 @@
         <!-- Featured Writeups Section -->
         <section class="featured-section">
             <div class="section-header">
-                <h2 class="section-title">Featured Writeups</h2>
+                <h2 class="section-title">Recent Writeups</h2>
                 <a href="writeups.html" class="section-link">View All <i class="fas fa-arrow-right"></i></a>
             </div>
             
@@ -122,7 +146,7 @@
                 
                 <article class="writeup-card">
                     <div class="writeup-header">
-                        <span class="writeup-date">2025-09-10</span>
+                        <span class="writeup-date">2025-09-12</span>
                         <span class="writeup-difficulty intermediate">Intermediate</span>
                     </div>
                     <h3 class="writeup-title">HackTheBox - SneakyMailer Writeup</h3>
@@ -137,10 +161,10 @@
                 
                 <article class="writeup-card">
                     <div class="writeup-header">
-                        <span class="writeup-date">2025-09-05</span>
+                        <span class="writeup-date">2025-09-10</span>
                         <span class="writeup-difficulty advanced">Advanced</span>
                     </div>
-                    <h3 class="writeup-title">Buffer Overflow Fundamentals for CTFs</h3>
+                    <h3 class="writeup-title">Buffer Overflow Fundamentals</h3>
                     <p class="writeup-excerpt">Comprehensive guide to understanding and exploiting buffer overflow vulnerabilities in CTF challenges.</p>
                     <div class="writeup-tags">
                         <span class="tag">Binary</span>
@@ -152,7 +176,7 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
+        <!-- Live Stats Section -->
         <section class="stats-section">
             <div class="stats-grid">
                 <div class="stat-item">
@@ -167,42 +191,33 @@
                 
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-flag"></i>
+                        <i class="fas fa-server"></i>
                     </div>
                     <div class="stat-content">
                         <div class="stat-number" data-count="127">0</div>
-                        <div class="stat-label">Machines Compromised</div>
+                        <div class="stat-label">Systems Explored</div>
                     </div>
                 </div>
                 
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-certificate"></i>
+                        <i class="fas fa-code"></i>
                     </div>
                     <div class="stat-content">
                         <div class="stat-number" data-count="15">0</div>
-                        <div class="stat-label">CTFs Participated</div>
+                        <div class="stat-label">Projects Developed</div>
                     </div>
                 </div>
                 
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-bug"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="stat-content">
                         <div class="stat-number" data-count="8">0</div>
-                        <div class="stat-label">CVEs Discovered</div>
+                        <div class="stat-label">Vulnerabilities Found</div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Quote Section -->
-        <section class="quote-section">
-            <div class="quote-container">
-                <div class="quote-icon">"</div>
-                <p class="quote-text">The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.</p>
-                <p class="quote-author">— Eric Schmidt</p>
             </div>
         </section>
     </main>
@@ -217,7 +232,7 @@
                         <span class="logo-text">KAMIKAZE<span class="logo-accent">0x00</span></span>
                         <span class="logo-bracket">]</span>
                     </div>
-                    <p class="footer-description">Cybersecurity researcher & CTF specialist focused on offensive security and vulnerability research.</p>
+                    <p class="footer-description">Technical security blog focused on practical research and documentation.</p>
                 </div>
                 
                 <div class="footer-links">
@@ -249,15 +264,12 @@
                         <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="#" title="HTB"><i class="fas fa-cube"></i></a>
-                        <a href="#" title="TryHackMe"><i class="fas fa-laptop-code"></i></a>
                     </div>
-                    <p class="footer-email">kamikaze0x00@protonmail.com</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p class="copyright">&copy; 2025 KAMIKAZE0x00. All rights reserved.</p>
-                <p class="footer-quote">"The only secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards." — Gene Spafford</p>
             </div>
         </div>
     </footer>
