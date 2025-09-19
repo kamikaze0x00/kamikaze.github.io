@@ -863,11 +863,87 @@
             
             // Load more button functionality
             const loadMoreBtn = document.getElementById('load-more');
+            // Sample data for additional writeups
+            const additionalWriteups = [
+                {
+                    platform: "TryHackMe",
+                    tags: "WebApp SQLi",
+                    difficulty: "Easy",
+                    date: "2025-08-25",
+                    title: "TryHackMe - Basic Pentesting Walkthrough",
+                    excerpt: "Beginner-friendly walkthrough of the Basic Pentesting room on TryHackMe.",
+                    readTime: "8 min read",
+                    link: "https://yourblog.com/basic-pentesting"
+                },
+                {
+                    platform: "HackTheBox",
+                    tags: "Windows PrivEsc",
+                    difficulty: "Medium",
+                    date: "2025-08-20",
+                    title: "HackTheBox - Buff Writeup",
+                    excerpt: "Step-by-step guide to solving the Buff machine on HackTheBox with focus on Windows privilege escalation.",
+                    readTime: "16 min read",
+                    link: "https://yourblog.com/hackthebox-buff"
+                },
+                {
+                    platform: "CTF",
+                    tags: "Crypto Steganography",
+                    difficulty: "Medium",
+                    date: "2025-08-15",
+                    title: "CTF Cryptography Challenges Guide",
+                    excerpt: "Comprehensive guide to solving various cryptography challenges in CTF competitions.",
+                    readTime: "22 min read",
+                    link: "https://yourblog.com/ctf-crypto-guide"
+                }
+            ];
+            
             if (loadMoreBtn) {
                 loadMoreBtn.addEventListener('click', function() {
                     this.innerHTML = 'Loading... <i class="fas fa-circle-notch fa-spin"></i>';
+                    
                     // Simulate loading more content
                     setTimeout(() => {
+                        // Add additional writeups
+                        additionalWriteups.forEach((writeup, index) => {
+                            const article = document.createElement('article');
+                            article.className = 'writeup-card';
+                            article.setAttribute('data-platform', writeup.platform);
+                            article.setAttribute('data-tags', writeup.tags);
+                            article.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+                            
+                            // Determine icon based on platform
+                            let iconClass = 'fas fa-terminal';
+                            if (writeup.platform === 'TryHackMe') iconClass = 'fas fa-star';
+                            if (writeup.platform === 'HackTheBox') iconClass = 'fas fa-cube';
+                            if (writeup.tags.includes('Crypto')) iconClass = 'fas fa-lock';
+                            
+                            article.innerHTML = `
+                                <div class="card-image">
+                                    <i class="${iconClass}"></i>
+                                    <div class="card-difficulty">${writeup.difficulty}</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-meta">
+                                        <span class="card-date">${writeup.date}</span>
+                                        <span class="card-platform">${writeup.platform}</span>
+                                    </div>
+                                    <h2 class="card-title">${writeup.title}</h2>
+                                    <p class="card-excerpt">${writeup.excerpt}</p>
+                                    <div class="card-tags">
+                                        ${writeup.tags.split(' ').map(tag => `<span class="card-tag">#${tag}</span>`).join('')}
+                                    </div>
+                                    <div class="card-actions">
+                                        <span class="read-time">${writeup.readTime}</span>
+                                        <a href="${writeup.link}" class="card-button" target="_blank">
+                                            Read <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            writeupsGrid.appendChild(article);
+                        });
+                        
                         this.innerHTML = 'No More Writeups <i class="fas fa-check"></i>';
                         this.disabled = true;
                     }, 1500);
