@@ -1,8 +1,3 @@
-:root {
-    --terminal-green: #00ff00;
-    --terminal-red: #ff003c;
-}
-
 /* Terminal Background Animation */
 #terminal-background {
     position: fixed;
@@ -29,7 +24,7 @@
 }
 
 .terminal-line:nth-child(2n) {
-    color: var(--terminal-red);
+    color: var(--accent-red);
     animation-delay: 2s;
 }
 
