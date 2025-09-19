@@ -1,0 +1,52 @@
+/* Terminal Background Animation */
+#terminal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.03;
+    pointer-events: none;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--terminal-green);
+    padding: 20px;
+    line-height: 1.4;
+}
+
+.terminal-line {
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(60, end);
+    margin-bottom: 5px;
+}
+
+.terminal-line:nth-child(2n) {
+    color: var(--accent-red);
+}
+
+.terminal-prompt {
+    color: var(--terminal-green);
+    margin-right: 8px;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    background-color: var(--terminal-green);
+    animation: blink 1s infinite;
+    width: 8px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
