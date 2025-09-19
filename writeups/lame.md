@@ -1,5 +1,4 @@
-![[Pasted image 20250824023427.png]]
-
+<img src="img/lame.png">
 
 | Machine Name         | Lame      |
 | -------------------- | --------- |
