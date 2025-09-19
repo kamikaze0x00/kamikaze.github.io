@@ -1,3 +1,8 @@
+:root {
+    --terminal-green: #00ff00;
+    --terminal-red: #ff003c;
+}
+
 /* Terminal Background Animation */
 #terminal-background {
     position: fixed;
@@ -19,12 +24,25 @@
 .terminal-line {
     white-space: nowrap;
     overflow: hidden;
-    animation: typing 3s steps(60, end);
     margin-bottom: 5px;
+    animation: typing 15s steps(100, end) infinite;
 }
 
 .terminal-line:nth-child(2n) {
-    color: var(--accent-red);
+    color: var(--terminal-red);
+    animation-delay: 2s;
+}
+
+.terminal-line:nth-child(3n) {
+    animation-delay: 4s;
+}
+
+.terminal-line:nth-child(4n) {
+    animation-delay: 6s;
+}
+
+.terminal-line:nth-child(5n) {
+    animation-delay: 8s;
 }
 
 .terminal-prompt {
@@ -42,8 +60,21 @@
 }
 
 @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    0% { 
+        width: 0; 
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% { 
+        width: 100%; 
+        opacity: 1;
+    }
+    100% { 
+        width: 100%; 
+        opacity: 0;
+    }
 }
 
 @keyframes blink {
