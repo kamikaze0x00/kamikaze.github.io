@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = var(--matrix-green);
+        ctx.fillStyle = '#00ff66';
         ctx.font = `${fontSize}px 'Courier New', monospace`;
         
         for (let i = 0; i < drops.length; i++) {
