@@ -92,7 +92,7 @@
         }
         
         .writeups-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem 3rem;
         }
@@ -104,12 +104,6 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
-            position: sticky;
-            top: 0;
-            background-color: var(--bg-primary);
-            z-index: 100;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
         }
         
         .filter-tags {
@@ -164,24 +158,9 @@
         
         .writeups-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .writeups-grid.list-view {
             grid-template-columns: 1fr;
-        }
-        
-        .writeups-grid.list-view .writeup-card {
-            flex-direction: row;
-            height: auto;
-        }
-        
-        .writeups-grid.list-view .card-image {
-            width: 250px;
-            height: 200px;
-            flex-shrink: 0;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
         
         .writeup-card {
@@ -191,29 +170,31 @@
             overflow: hidden;
             transition: all 0.4s ease;
             position: relative;
-            height: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            height: 200px;
         }
         
         .writeup-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--accent-red);
-            box-shadow: 0 15px 30px rgba(255, 0, 60, 0.15);
+            box-shadow: 0 10px 20px rgba(255, 0, 60, 0.15);
         }
         
         .card-image {
-            height: 120px;
+            width: 250px;
+            height: 100%;
             overflow: hidden;
             position: relative;
             background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
         
         .card-image i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: white;
             opacity: 0.8;
         }
@@ -241,7 +222,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
         
         .card-date {
@@ -259,29 +240,15 @@
         
         .card-title {
             font-size: 1.4rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             line-height: 1.3;
         }
         
         .card-excerpt {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             flex-grow: 1;
-        }
-        
-        .card-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .card-tag {
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
-            padding: 0.3rem 0.7rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            line-height: 1.5;
         }
         
         .card-actions {
@@ -318,19 +285,19 @@
         
         .featured-writeup {
             grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 2rem;
+            height: 250px;
         }
         
         .featured-writeup .card-image {
+            width: 350px;
             height: 100%;
-            border-radius: 10px 0 0 10px;
         }
         
         .featured-content {
-            padding: 2.5rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -383,24 +350,22 @@
         
         /* Responsive adjustments */
         @media (max-width: 1024px) {
-            .writeups-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-            
-            .featured-writeup {
-                grid-template-columns: 1fr;
-            }
-            
-            .featured-writeup .card-image {
-                height: 250px;
-                border-radius: 10px 10px 0 0;
-            }
-            
-            .writeups-grid.list-view .writeup-card {
+            .writeup-card {
+                height: auto;
                 flex-direction: column;
             }
             
-            .writeups-grid.list-view .card-image {
+            .card-image {
+                width: 100%;
+                height: 150px;
+            }
+            
+            .featured-writeup {
+                height: auto;
+                flex-direction: column;
+            }
+            
+            .featured-writeup .card-image {
                 width: 100%;
                 height: 200px;
             }
@@ -414,15 +379,10 @@
             .filter-section {
                 flex-direction: column;
                 align-items: flex-start;
-                position: static;
             }
             
             .view-options {
                 align-self: flex-end;
-            }
-            
-            .writeups-grid {
-                grid-template-columns: 1fr;
             }
         }
         
@@ -445,6 +405,14 @@
             
             .featured-content {
                 padding: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .card-excerpt {
+                font-size: 0.9rem;
             }
         }
         
@@ -524,18 +492,13 @@
                 <div class="filter-tag" data-filter="Binary">Binary</div>
                 <div class="filter-tag" data-filter="Web">Web</div>
                 <div class="filter-tag" data-filter="Forensics">Forensics</div>
-                <div class="filter-tag" data-filter="Crypto">Crypto</div>
-                <div class="filter-tag" data-filter="Mobile">Mobile</div>
-                <div class="filter-tag" data-filter="AI">AI</div>
-                <div class="filter-tag" data-filter="IoT">IoT</div>
-                <div class="filter-tag" data-filter="Reversing">Reversing</div>
             </div>
             
             <div class="view-options">
-                <div class="view-option active" data-view="grid">
+                <div class="view-option" data-view="grid">
                     <i class="fas fa-grip-horizontal"></i>
                 </div>
-                <div class="view-option" data-view="list">
+                <div class="view-option active" data-view="list">
                     <i class="fas fa-list"></i>
                 </div>
             </div>
@@ -543,7 +506,7 @@
 
         <div class="writeups-grid" id="writeups-grid">
             <!-- Featured Writeup -->
-            <article class="writeup-card featured-writeup" data-platform="TryHackMe" data-tags="Enumeration PrivEsc WebApp">
+            <article class="writeup-card featured-writeup" data-platform="TryHackMe">
                 <div class="card-image">
                     <i class="fas fa-star"></i>
                     <div class="card-difficulty">Advanced</div>
@@ -556,11 +519,6 @@
                     </div>
                     <h2 class="card-title">TryHackMe - Blog CTF Complete Walkthrough</h2>
                     <p class="card-excerpt">A detailed walkthrough of the Blog CTF room on TryHackMe, covering enumeration, exploitation, and privilege escalation techniques with advanced vulnerability chaining.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">#Enumeration</span>
-                        <span class="card-tag">#PrivEsc</span>
-                        <span class="card-tag">#WebApp</span>
-                    </div>
                     <div class="card-actions">
                         <span class="read-time">15 min read</span>
                         <a href="https://yourblog.com/tryhackme-blog-ctf" class="card-button" target="_blank">
@@ -571,7 +529,7 @@
             </article>
 
             <!-- Regular Writeups -->
-            <article class="writeup-card" data-platform="HackTheBox" data-tags="Linux PrivEsc">
+            <article class="writeup-card" data-platform="HackTheBox">
                 <div class="card-image">
                     <i class="fas fa-terminal"></i>
                     <div class="card-difficulty">Medium</div>
@@ -583,10 +541,6 @@
                     </div>
                     <h2 class="card-title">HackTheBox - Academy Writeup</h2>
                     <p class="card-excerpt">Step-by-step guide to solving the Academy machine on HackTheBox with detailed privilege escalation path.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">#Linux</span>
-                        <span class="card-tag">#PrivEsc</span>
-                    </div>
                     <div class="card-actions">
                         <span class="read-time">12 min read</span>
                         <a href="https://yourblog.com/hackthebox-academy" class="card-button" target="_blank">
@@ -596,7 +550,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card" data-platform="CTF" data-tags="Binary Exploitation">
+            <article class="writeup-card" data-platform="CTF">
                 <div class="card-image">
                     <i class="fas fa-bug"></i>
                     <div class="card-difficulty">Hard</div>
@@ -608,10 +562,6 @@
                     </div>
                     <h2 class="card-title">Buffer Overflow Exploitation Guide</h2>
                     <p class="card-excerpt">Comprehensive guide to buffer overflow vulnerabilities and exploitation techniques for modern binaries.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">#Binary</span>
-                        <span class="card-tag">#Exploitation</span>
-                    </div>
                     <div class="card-actions">
                         <span class="read-time">20 min read</span>
                         <a href="https://yourblog.com/buffer-overflow-guide" class="card-button" target="_blank">
@@ -621,7 +571,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card" data-platform="Web" data-tags="Web SQLi">
+            <article class="writeup-card" data-platform="Web">
                 <div class="card-image">
                     <i class="fas fa-database"></i>
                     <div class="card-difficulty">Medium</div>
@@ -633,10 +583,6 @@
                     </div>
                     <h2 class="card-title">SQL Injection Mastery</h2>
                     <p class="card-excerpt">Advanced SQL injection techniques for CTF challenges and bug bounty hunting with real-world examples.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">#Web</span>
-                        <span class="card-tag">#SQLi</span>
-                    </div>
                     <div class="card-actions">
                         <span class="read-time">14 min read</span>
                         <a href="https://yourblog.com/sql-injection-mastery" class="card-button" target="_blank">
@@ -646,7 +592,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card" data-platform="Forensics" data-tags="Forensics Wireshark">
+            <article class="writeup-card" data-platform="Forensics">
                 <div class="card-image">
                     <i class="fas fa-network-wired"></i>
                     <div class="card-difficulty">Easy</div>
@@ -658,10 +604,6 @@
                     </div>
                     <h2 class="card-title">Network Forensics Analysis</h2>
                     <p class="card-excerpt">Analyzing network traffic captures for CTF forensics challenges and identifying malicious activity.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">#Forensics</span>
-                        <span class="card-tag">#Wireshark</span>
-                    </div>
                     <div class="card-actions">
                         <span class="read-time">10 min read</span>
                         <a href="https://yourblog.com/network-forensics" class="card-button" target="_blank">
@@ -671,7 +613,7 @@
                 </div>
             </article>
 
-            <article class="writeup-card" data-platform="Linux" data-tags="Linux PrivEsc">
+            <article class="writeup-card" data-platform="Linux">
                 <div class="card-image">
                     <i class="fas fa-shield-alt"></i>
                     <div class="card-difficulty">Medium</div>
@@ -683,10 +625,6 @@
                     </div>
                     <h2 class="card-title">Linux Privilege Escalation Techniques</h2>
                     <p class="card-excerpt">Comprehensive guide to Linux privilege escalation methods for CTFs and penetration testing.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">#Linux</span>
-                        <span class="card-tag">#PrivEsc</span>
-                    </div>
                     <div class="card-actions">
                         <span class="read-time">18 min read</span>
                         <a href="https://yourblog.com/linux-privesc" class="card-button" target="_blank">
@@ -795,13 +733,36 @@
                     viewOptions.forEach(o => o.classList.remove('active'));
                     this.classList.add('active');
                     
-                    if (viewType === 'list') {
-                        writeupsGrid.classList.add('list-view');
-                    } else {
+                    if (viewType === 'grid') {
                         writeupsGrid.classList.remove('list-view');
+                        writeupsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
+                        document.querySelectorAll('.writeup-card').forEach(card => {
+                            card.style.flexDirection = 'column';
+                            card.style.height = 'auto';
+                        });
+                        document.querySelectorAll('.card-image').forEach(image => {
+                            image.style.width = '100%';
+                            image.style.height = '200px';
+                        });
+                    } else {
+                        writeupsGrid.classList.add('list-view');
+                        writeupsGrid.style.gridTemplateColumns = '1fr';
+                        document.querySelectorAll('.writeup-card').forEach(card => {
+                            if (!card.classList.contains('featured-writeup')) {
+                                card.style.flexDirection = 'row';
+                                card.style.height = '200px';
+                            }
+                        });
+                        document.querySelectorAll('.card-image').forEach(image => {
+                            image.style.width = '250px';
+                            image.style.height = '100%';
+                        });
                     }
                 });
             });
+            
+            // Set list view as default
+            writeupsGrid.classList.add('list-view');
             
             // Search functionality
             const searchForm = document.getElementById('search-form');
@@ -824,7 +785,6 @@
                 
                 writeupCards.forEach(card => {
                     const platform = card.getAttribute('data-platform');
-                    const tags = card.getAttribute('data-tags').toLowerCase();
                     const title = card.querySelector('.card-title').textContent.toLowerCase();
                     const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
                     
@@ -834,8 +794,7 @@
                     // Check if card matches search term
                     const matchesSearch = searchTerm === '' || 
                         title.includes(searchTerm) || 
-                        excerpt.includes(searchTerm) || 
-                        tags.includes(searchTerm);
+                        excerpt.includes(searchTerm);
                     
                     // Show or hide card based on filters
                     if (matchesFilter && matchesSearch) {
@@ -867,7 +826,6 @@
             const additionalWriteups = [
                 {
                     platform: "TryHackMe",
-                    tags: "WebApp SQLi",
                     difficulty: "Easy",
                     date: "2025-08-25",
                     title: "TryHackMe - Basic Pentesting Walkthrough",
@@ -877,7 +835,6 @@
                 },
                 {
                     platform: "HackTheBox",
-                    tags: "Windows PrivEsc",
                     difficulty: "Medium",
                     date: "2025-08-20",
                     title: "HackTheBox - Buff Writeup",
@@ -887,7 +844,6 @@
                 },
                 {
                     platform: "CTF",
-                    tags: "Crypto Steganography",
                     difficulty: "Medium",
                     date: "2025-08-15",
                     title: "CTF Cryptography Challenges Guide",
@@ -908,14 +864,12 @@
                             const article = document.createElement('article');
                             article.className = 'writeup-card';
                             article.setAttribute('data-platform', writeup.platform);
-                            article.setAttribute('data-tags', writeup.tags);
                             article.style.animationDelay = `${0.1 + (index * 0.1)}s`;
                             
                             // Determine icon based on platform
                             let iconClass = 'fas fa-terminal';
                             if (writeup.platform === 'TryHackMe') iconClass = 'fas fa-star';
                             if (writeup.platform === 'HackTheBox') iconClass = 'fas fa-cube';
-                            if (writeup.tags.includes('Crypto')) iconClass = 'fas fa-lock';
                             
                             article.innerHTML = `
                                 <div class="card-image">
@@ -929,9 +883,6 @@
                                     </div>
                                     <h2 class="card-title">${writeup.title}</h2>
                                     <p class="card-excerpt">${writeup.excerpt}</p>
-                                    <div class="card-tags">
-                                        ${writeup.tags.split(' ').map(tag => `<span class="card-tag">#${tag}</span>`).join('')}
-                                    </div>
                                     <div class="card-actions">
                                         <span class="read-time">${writeup.readTime}</span>
                                         <a href="${writeup.link}" class="card-button" target="_blank">
