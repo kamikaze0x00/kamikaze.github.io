@@ -1,938 +1,416 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Writeups - Kamikaze0x00</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #151520;
-            --accent-red: #ff2a6d;
-            --dark-red: #d100d1;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0c0;
-            --border-color: #2a2a40;
+<style>
+    /* Enhanced Writeups Page Styles */
+    body {
+        background-color: #000000; /* Pure black background */
+        color: #ffffff;
+        position: relative;
+        overflow-x: hidden;
+    }
+    
+    /* Add a red gradient overlay */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(139, 0, 0, 0.25) 100%);
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    .writeups-hero {
+        background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(139, 0, 0, 0.3) 100%);
+        padding: 5rem 2rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid #ff003c;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .writeups-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><path d="M0 0L100 100" stroke="%23ff0000" stroke-width="0.5" opacity="0.2"/><path d="M100 0L0 100" stroke="%23ff0000" stroke-width="0.5" opacity="0.2"/></svg>');
+        opacity: 0.1;
+    }
+    
+    header {
+        background-color: rgba(0, 0, 0, 0.9);
+        border-bottom: 1px solid #ff0000;
+    }
+    
+    .writeups-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 3rem;
+    }
+    
+    .filter-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .filter-tags {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+    
+    .filter-tag {
+        background-color: #1a0000;
+        color: #ff6666;
+        border: 1px solid #660000;
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+    
+    .filter-tag.active, .filter-tag:hover {
+        background-color: #ff0000;
+        color: #ffffff;
+        border-color: #ff0000;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+    }
+    
+    .view-options {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .view-option {
+        background-color: #1a0000;
+        color: #ff6666;
+        border: 1px solid #660000;
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .view-option.active, .view-option:hover {
+        background-color: #ff0000;
+        color: #ffffff;
+        border-color: #ff0000;
+    }
+    
+    .writeups-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .writeup-card {
+        background: linear-gradient(145deg, #1a0000, #250000);
+        border: 1px solid #660000;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        height: 200px;
+    }
+    
+    .writeup-card:hover {
+        transform: translateY(-5px);
+        border-color: #ff0000;
+        box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+    }
+    
+    .card-image {
+        width: 250px;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(45deg, #ff0000, #8b0000);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .card-image i {
+        font-size: 2.5rem;
+        color: white;
+        opacity: 0.8;
+    }
+    
+    .card-difficulty {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
+    }
+    
+    .card-date {
+        color: #ff0000;
+        font-size: 0.9rem;
+    }
+    
+    .card-platform {
+        background-color: #000000;
+        color: #ff6666;
+        padding: 0.3rem 0.7rem;
+        border-radius: 5px;
+        font-size: 0.8rem;
+    }
+    
+    .card-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.3;
+    }
+    
+    .card-excerpt {
+        color: #cccccc;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+        line-height: 1.5;
+    }
+    
+    .card-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .read-time {
+        color: #cccccc;
+        font-size: 0.9rem;
+    }
+    
+    .card-button {
+        background: linear-gradient(45deg, #ff0000, #8b0000);
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+    
+    .card-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+    }
+    
+    .featured-writeup {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 2rem;
+        height: 250px;
+    }
+    
+    .featured-writeup .card-image {
+        width: 350px;
+        height: 100%;
+    }
+    
+    .featured-content {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .featured-badge {
+        background: linear-gradient(45deg, #ff0000, #8b0000);
+        color: white;
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+    
+    .load-more {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    
+    .load-more-button {
+        background: linear-gradient(45deg, #ff0000, #8b0000);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .load-more-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+    }
+    
+    .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        color: #cccccc;
+        font-size: 1.2rem;
+    }
+    
+    footer {
+        background-color: #0a0000;
+        border-top: 1px solid #660000;
+    }
+    
+    .footer-links a {
+        color: #ff6666;
+    }
+    
+    .footer-links a:hover {
+        color: #ffffff;
+    }
+    
+    .copyright {
+        color: #ff6666;
+    }
+    
+    /* Animation for cards */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-        
-        /* Header Styles */
-        header {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-        }
-        
-        .logo span {
-            color: var(--accent-red);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            color: var(--text-primary);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-red);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link.active::after, .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-primary);
-            margin: 2px 0;
-            transition: 0.3s;
-        }
-        
-        /* Hero Section */
-        .writeups-hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(255, 42, 109, 0.1) 0%, rgba(139, 0, 139, 0.2) 100%);
-            margin-bottom: 3rem;
-        }
-        
-        .writeups-hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .writeups-hero p {
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 1.1rem;
-        }
-        
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .search-input {
-            width: 100%;
-            background: rgba(20, 20, 30, 0.8);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 0.8rem 1.2rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent-red);
-            box-shadow: 0 0 0 2px rgba(255, 42, 109, 0.2);
-        }
-        
-        /* Main Content */
-        .writeups-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem 3rem;
-        }
-        
-        .filter-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .filter-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-tag {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .filter-tag.active, .filter-tag:hover {
-            background: var(--accent-red);
-            color: var(--text-primary);
-            border-color: var(--accent-red);
-        }
-        
-        .view-options {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .view-option {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-            width: 36px;
-            height: 36px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .view-option.active, .view-option:hover {
-            background: var(--accent-red);
-            color: var(--text-primary);
-            border-color: var(--accent-red);
-        }
-        
-        /* Writeups Grid */
-        .writeups-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        
+    }
+    
+    .writeup-card {
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+    }
+    
+    .writeup-card:nth-child(1) { animation-delay: 0.1s; }
+    .writeup-card:nth-child(2) { animation-delay: 0.2s; }
+    .writeup-card:nth-child(3) { animation-delay: 0.3s; }
+    .writeup-card:nth-child(4) { animation-delay: 0.4s; }
+    .writeup-card:nth-child(5) { animation-delay: 0.5s; }
+    .writeup-card:nth-child(6) { animation-delay: 0.6s; }
+    .writeup-card:nth-child(7) { animation-delay: 0.7s; }
+    .writeup-card:nth-child(8) { animation-delay: 0.8s; }
+    
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
         .writeup-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: row;
-        }
-        
-        .writeup-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-red);
-            box-shadow: 0 10px 20px rgba(255, 42, 109, 0.1);
+            height: auto;
+            flex-direction: column;
         }
         
         .card-image {
-            width: 120px;
-            min-height: 120px;
-            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            width: 100%;
+            height: 150px;
         }
         
-        .card-image i {
+        .featured-writeup {
+            height: auto;
+            flex-direction: column;
+        }
+        
+        .featured-writeup .card-image {
+            width: 100%;
+            height: 200px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .writeups-hero h1 {
+            font-size: 2.5rem;
+        }
+        
+        .filter-section {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .view-options {
+            align-self: flex-end;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .writeups-hero {
+            padding: 3rem 1.5rem;
+        }
+        
+        .writeups-hero h1 {
             font-size: 2rem;
-            color: white;
-            opacity: 0.9;
+        }
+        
+        .writeups-container {
+            padding: 0 1.5rem 2rem;
         }
         
         .card-content {
             padding: 1.2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-        }
-        
-        .card-date {
-            color: var(--accent-red);
-        }
-        
-        .card-platform {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-        }
-        
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-        
-        .card-excerpt {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            flex-grow: 1;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
-        
-        .card-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .read-time {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        .card-button {
-            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .card-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.3);
-        }
-        
-        .featured-writeup {
-            grid-column: 1 / -1;
-            display: flex;
-            flex-direction: row;
-            margin-bottom: 1rem;
-        }
-        
-        .featured-writeup .card-image {
-            width: 150px;
         }
         
         .featured-content {
             padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
         
-        .featured-badge {
-            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
-            color: white;
-            padding: 0.2rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 0.8rem;
+        .card-title {
+            font-size: 1.2rem;
         }
         
-        .load-more {
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        .load-more-button {
-            background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .load-more-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 42, 109, 0.3);
-        }
-        
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
-        
-        .copyright {
-            color: var(--text-secondary);
+        .card-excerpt {
             font-size: 0.9rem;
         }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .writeup-card {
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-        }
-        
-        .writeup-card:nth-child(1) { animation-delay: 0.1s; }
-        .writeup-card:nth-child(2) { animation-delay: 0.2s; }
-        .writeup-card:nth-child(3) { animation-delay: 0.3s; }
-        .writeup-card:nth-child(4) { animation-delay: 0.4s; }
-        .writeup-card:nth-child(5) { animation-delay: 0.5s; }
-        .writeup-card:nth-child(6) { animation-delay: 0.6s; }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 1rem;
-            }
-            
-            nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg-primary);
-                border-top: 1px solid var(--border-color);
-            }
-            
-            nav.active {
-                display: block;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-            
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-            
-            .writeup-card, .featured-writeup {
-                flex-direction: column;
-            }
-            
-            .card-image, .featured-writeup .card-image {
-                width: 100%;
-                height: 120px;
-            }
-            
-            .filter-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .view-options {
-                align-self: flex-end;
-            }
-            
-            .writeups-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .writeups-hero {
-                padding: 3rem 1rem;
-            }
-            
-            .writeups-container {
-                padding: 0 1rem 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">KAMIKAZE<span>0x00</span></div>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="writeups.html" class="nav-link active">Writeups</a></li>
-                    <li><a href="categories.html" class="nav-link">Categories</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="writeups-hero">
-        <h1>CTF Writeups</h1>
-        <p>Detailed solutions and walkthroughs for various Capture The Flag challenges</p>
-        <div class="search-box">
-            <input type="text" class="search-input" id="search-input" placeholder="Search writeups...">
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="writeups-container">
-        <div class="filter-section">
-            <div class="filter-tags">
-                <div class="filter-tag active" data-filter="all">All</div>
-                <div class="filter-tag" data-filter="TryHackMe">TryHackMe</div>
-                <div class="filter-tag" data-filter="HackTheBox">HackTheBox</div>
-                <div class="filter-tag" data-filter="Web">Web</div>
-                <div class="filter-tag" data-filter="Forensics">Forensics</div>
-            </div>
-            
-            <div class="view-options">
-                <div class="view-option" data-view="grid">
-                    <i class="fas fa-grip-horizontal"></i>
-                </div>
-                <div class="view-option active" data-view="list">
-                    <i class="fas fa-list"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="writeups-grid" id="writeups-grid">
-            <!-- Featured Writeup -->
-            <article class="writeup-card featured-writeup" data-platform="TryHackMe">
-                <div class="card-image">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="featured-content">
-                    <span class="featured-badge">FEATURED</span>
-                    <div class="card-meta">
-                        <span class="card-date">2025-09-15</span>
-                        <span class="card-platform">TryHackMe</span>
-                    </div>
-                    <h2 class="card-title">TryHackMe - Blog CTF Complete Walkthrough</h2>
-                    <p class="card-excerpt">A detailed walkthrough of the Blog CTF room on TryHackMe, covering enumeration, exploitation, and privilege escalation techniques with advanced vulnerability chaining.</p>
-                    <div class="card-actions">
-                        <span class="read-time">15 min read</span>
-                        <a href="https://yourblog.com/tryhackme-blog-ctf" class="card-button">
-                            Read Writeup <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Regular Writeups -->
-            <article class="writeup-card" data-platform="HackTheBox">
-                <div class="card-image">
-                    <i class="fas fa-terminal"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="card-date">2025-09-12</span>
-                        <span class="card-platform">HackTheBox</span>
-                    </div>
-                    <h2 class="card-title">HackTheBox - Academy Writeup</h2>
-                    <p class="card-excerpt">Step-by-step guide to solving the Academy machine on HackTheBox with detailed privilege escalation path.</p>
-                    <div class="card-actions">
-                        <span class="read-time">12 min read</span>
-                        <a href="https://yourblog.com/hackthebox-academy" class="card-button">
-                            Read <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="writeup-card" data-platform="CTF">
-                <div class="card-image">
-                    <i class="fas fa-bug"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="card-date">2025-09-08</span>
-                        <span class="card-platform">CTF</span>
-                    </div>
-                    <h2 class="card-title">Buffer Overflow Exploitation Guide</h2>
-                    <p class="card-excerpt">Comprehensive guide to buffer overflow vulnerabilities and exploitation techniques for modern binaries.</p>
-                    <div class="card-actions">
-                        <span class="read-time">20 min read</span>
-                        <a href="https://yourblog.com/buffer-overflow-guide" class="card-button">
-                            Read <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="writeup-card" data-platform="Web">
-                <div class="card-image">
-                    <i class="fas fa-database"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="card-date">2025-09-05</span>
-                        <span class="card-platform">Web</span>
-                    </div>
-                    <h2 class="card-title">SQL Injection Mastery</h2>
-                    <p class="card-excerpt">Advanced SQL injection techniques for CTF challenges and bug bounty hunting with real-world examples.</p>
-                    <div class="card-actions">
-                        <span class="read-time">14 min read</span>
-                        <a href="https://yourblog.com/sql-injection-mastery" class="card-button">
-                            Read <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="writeup-card" data-platform="Forensics">
-                <div class="card-image">
-                    <i class="fas fa-network-wired"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="card-date">2025-09-01</span>
-                        <span class="card-platform">Forensics</span>
-                    </div>
-                    <h2 class="card-title">Network Forensics Analysis</h2>
-                    <p class="card-excerpt">Analyzing network traffic captures for CTF forensics challenges and identifying malicious activity.</p>
-                    <div class="card-actions">
-                        <span class="read-time">10 min read</span>
-                        <a href="https://yourblog.com/network-forensics" class="card-button">
-                            Read <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="writeup-card" data-platform="Linux">
-                <div class="card-image">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="card-date">2025-08-28</span>
-                        <span class="card-platform">Linux</span>
-                    </div>
-                    <h2 class="card-title">Linux Privilege Escalation Techniques</h2>
-                    <p class="card-excerpt">Comprehensive guide to Linux privilege escalation methods for CTFs and penetration testing.</p>
-                    <div class="card-actions">
-                        <span class="read-time">18 min read</span>
-                        <a href="https://yourblog.com/linux-privesc" class="card-button">
-                            Read <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-        </div>
-
-        <div class="load-more">
-            <button class="load-more-button" id="load-more">
-                Load More Writeups <i class="fas fa-sync-alt"></i>
-            </button>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="writeups.html">Writeups</a>
-                <a href="categories.html">Categories</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Kamikaze0x00. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const menuToggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('nav');
-            
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    if (nav) {
-                        nav.classList.toggle('active');
-                    }
-                });
-            }
-            
-            // Filter tags functionality
-            const filterTags = document.querySelectorAll('.filter-tag');
-            let activeFilter = 'all';
-            
-            filterTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    const filterValue = this.getAttribute('data-filter');
-                    filterTags.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilter = filterValue;
-                    filterWriteups();
-                });
-            });
-            
-            // View options functionality
-            const viewOptions = document.querySelectorAll('.view-option');
-            const writeupsGrid = document.getElementById('writeups-grid');
-            
-            viewOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const viewType = this.getAttribute('data-view');
-                    viewOptions.forEach(o => o.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    if (viewType === 'grid') {
-                        writeupsGrid.classList.remove('list-view');
-                        writeupsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
-                        document.querySelectorAll('.writeup-card').forEach(card => {
-                            card.style.flexDirection = 'column';
-                        });
-                        document.querySelectorAll('.card-image').forEach(image => {
-                            image.style.width = '100%';
-                            image.style.height = '150px';
-                        });
-                    } else {
-                        writeupsGrid.classList.add('list-view');
-                        writeupsGrid.style.gridTemplateColumns = '1fr';
-                        document.querySelectorAll('.writeup-card').forEach(card => {
-                            if (!card.classList.contains('featured-writeup')) {
-                                card.style.flexDirection = 'row';
-                            }
-                        });
-                        document.querySelectorAll('.card-image').forEach(image => {
-                            image.style.width = '120px';
-                            image.style.height = '120px';
-                        });
-                    }
-                });
-            });
-            
-            // Set list view as default
-            writeupsGrid.classList.add('list-view');
-            
-            // Search functionality
-            const searchInput = document.getElementById('search-input');
-            
-            searchInput.addEventListener('input', function() {
-                filterWriteups();
-            });
-            
-            // Filter writeups based on active filter and search term
-            function filterWriteups() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const writeupCards = document.querySelectorAll('.writeup-card');
-                let visibleCount = 0;
-                
-                writeupCards.forEach(card => {
-                    const platform = card.getAttribute('data-platform');
-                    const title = card.querySelector('.card-title').textContent.toLowerCase();
-                    const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
-                    
-                    // Check if card matches filter
-                    const matchesFilter = activeFilter === 'all' || platform === activeFilter;
-                    
-                    // Check if card matches search term
-                    const matchesSearch = searchTerm === '' || 
-                        title.includes(searchTerm) || 
-                        excerpt.includes(searchTerm);
-                    
-                    // Show or hide card based on filters
-                    if (matchesFilter && matchesSearch) {
-                        card.style.display = 'flex';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                
-                // Show no results message if needed
-                let noResults = document.getElementById('no-results');
-                if (visibleCount === 0) {
-                    if (!noResults) {
-                        noResults = document.createElement('div');
-                        noResults.id = 'no-results';
-                        noResults.className = 'no-results';
-                        noResults.innerHTML = '<i class="fas fa-search fa-2x"></i><h3>No writeups found</h3><p>Try adjusting your search or filter criteria</p>';
-                        writeupsGrid.appendChild(noResults);
-                    }
-                } else if (noResults) {
-                    noResults.remove();
-                }
-            }
-            
-            // Load more button functionality
-            const loadMoreBtn = document.getElementById('load-more');
-            // Sample data for additional writeups
-            const additionalWriteups = [
-                {
-                    platform: "TryHackMe",
-                    date: "2025-08-25",
-                    title: "TryHackMe - Basic Pentesting Walkthrough",
-                    excerpt: "Beginner-friendly walkthrough of the Basic Pentesting room on TryHackMe.",
-                    readTime: "8 min read",
-                    link: "https://yourblog.com/basic-pentesting"
-                },
-                {
-                    platform: "HackTheBox",
-                    date: "2025-08-20",
-                    title: "HackTheBox - Buff Writeup",
-                    excerpt: "Step-by-step guide to solving the Buff machine on HackTheBox with focus on Windows privilege escalation.",
-                    readTime: "16 min read",
-                    link: "https://yourblog.com/hackthebox-buff"
-                },
-                {
-                    platform: "CTF",
-                    date: "2025-08-15",
-                    title: "CTF Cryptography Challenges Guide",
-                    excerpt: "Comprehensive guide to solving various cryptography challenges in CTF competitions.",
-                    readTime: "22 min read",
-                    link: "https://yourblog.com/ctf-crypto-guide"
-                }
-            ];
-            
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', function() {
-                    this.innerHTML = 'Loading... <i class="fas fa-circle-notch fa-spin"></i>';
-                    
-                    // Simulate loading more content
-                    setTimeout(() => {
-                        // Add additional writeups
-                        additionalWriteups.forEach((writeup, index) => {
-                            const article = document.createElement('article');
-                            article.className = 'writeup-card';
-                            article.setAttribute('data-platform', writeup.platform);
-                            article.style.animationDelay = `${0.1 + (index * 0.1)}s`;
-                            
-                            // Determine icon based on platform
-                            let iconClass = 'fas fa-terminal';
-                            if (writeup.platform === 'TryHackMe') iconClass = 'fas fa-star';
-                            if (writeup.platform === 'HackTheBox') iconClass = 'fas fa-cube';
-                            
-                            article.innerHTML = `
-                                <div class="card-image">
-                                    <i class="${iconClass}"></i>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-meta">
-                                        <span class="card-date">${writeup.date}</span>
-                                        <span class="card-platform">${writeup.platform}</span>
-                                    </div>
-                                    <h2 class="card-title">${writeup.title}</h2>
-                                    <p class="card-excerpt">${writeup.excerpt}</p>
-                                    <div class="card-actions">
-                                        <span class="read-time">${writeup.readTime}</span>
-                                        <a href="${writeup.link}" class="card-button">
-                                            Read <i class="fas fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            writeupsGrid.appendChild(article);
-                        });
-                        
-                        this.innerHTML = 'No More Writeups <i class="fas fa-check"></i>';
-                        this.disabled = true;
-                    }, 1500);
-                });
-            }
-            
-            // Set active navigation link based on current page
-            const currentPage = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    }
+</style>
