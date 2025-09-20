@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-primary: #000000;
+            --bg-primary: #0a0a0a;
             --bg-secondary: #1a0000;
-            --accent-red: #ff0000;
+            --accent-red: #ff3333;
+            --accent-red-glow: 0 0 10px rgba(255, 51, 51, 0.7);
             --dark-red: #8b0000;
             --text-primary: #ffffff;
             --text-secondary: #cccccc;
             --border-color: #660000;
+            --card-bg: linear-gradient(145deg, #1a0000, #250000);
+            --transition: all 0.3s ease;
         }
         
         * {
@@ -40,19 +43,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(139, 0, 0, 0.25) 100%);
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.25) 0%, transparent 40%);
             z-index: -1;
             pointer-events: none;
         }
         
         /* Header Styles */
         header {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--accent-red);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
         }
         
         .header-container {
@@ -69,10 +75,13 @@
             font-weight: bold;
             font-size: 1.5rem;
             color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            letter-spacing: 1px;
         }
         
         .logo span {
             color: var(--accent-red);
+            text-shadow: 0 0 15px var(--accent-red);
         }
         
         nav ul {
@@ -85,8 +94,9 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: var(--transition);
             position: relative;
+            padding: 0.5rem 0;
         }
         
         .nav-link:hover, .nav-link.active {
@@ -96,12 +106,13 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
             background: var(--accent-red);
             transition: width 0.3s ease;
+            box-shadow: var(--accent-red-glow);
         }
         
         .nav-link.active::after, .nav-link:hover::after {
@@ -112,6 +123,9 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 5px;
         }
         
         .menu-toggle span {
@@ -120,15 +134,16 @@
             background: var(--text-primary);
             margin: 2px 0;
             transition: 0.3s;
+            border-radius: 2px;
         }
         
         /* Hero Section */
         .writeups-hero {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(139, 0, 0, 0.3) 100%);
             margin-bottom: 3rem;
-            border-bottom: 1px solid var(--accent-red);
+            border-bottom: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
@@ -140,16 +155,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><path d="M0 0L100 100" stroke="%23ff0000" stroke-width="0.5" opacity="0.2"/><path d="M100 0L0 100" stroke="%23ff0000" stroke-width="0.5" opacity="0.2"/></svg>');
-            opacity: 0.1;
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><path d="M0 0L100 100" stroke="%23ff3333" stroke-width="0.5" opacity="0.2"/><path d="M100 0L0 100" stroke="%23ff3333" stroke-width="0.5" opacity="0.2"/></svg>'),
+                linear-gradient(90deg, transparent 0%, rgba(255, 51, 51, 0.1) 50%, transparent 100%);
+            opacity: 0.2;
+            animation: backgroundMove 20s linear infinite;
+        }
+        
+        @keyframes backgroundMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 100px 100px, 100% 0; }
         }
         
         .writeups-hero h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(139, 0, 0, 0.3);
         }
         
         .writeups-hero p {
@@ -170,21 +194,34 @@
             background: rgba(26, 0, 0, 0.8);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 0.8rem 1.2rem;
+            padding: 0.8rem 1.2rem 0.8rem 3rem;
             border-radius: 25px;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
         
         .search-input:focus {
             outline: none;
             border-color: var(--accent-red);
-            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 0 0 2px rgba(255, 51, 51, 0.2), 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+        
+        .search-box::before {
+            content: "\f002";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff6666;
+            z-index: 1;
         }
         
         /* Main Content */
         .writeups-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem 3rem;
         }
@@ -196,6 +233,10 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
+            padding: 1rem;
+            background: rgba(26, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
         
         .filter-tags {
@@ -211,7 +252,7 @@
             padding: 0.4rem 1rem;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-size: 0.9rem;
         }
         
@@ -219,6 +260,7 @@
             background: var(--accent-red);
             color: var(--text-primary);
             border-color: var(--accent-red);
+            box-shadow: var(--accent-red-glow);
         }
         
         .view-options {
@@ -237,13 +279,14 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .view-option.active, .view-option:hover {
             background: var(--accent-red);
             color: var(--text-primary);
             border-color: var(--accent-red);
+            box-shadow: var(--accent-red-glow);
         }
         
         /* Writeups Grid */
@@ -255,19 +298,20 @@
         }
         
         .writeup-card {
-            background: linear-gradient(145deg, #1a0000, #250000);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 10px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: flex;
             flex-direction: row;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .writeup-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             border-color: var(--accent-red);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
         }
         
         .card-image {
@@ -278,12 +322,26 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
         }
         
         .card-image i {
             font-size: 2rem;
             color: white;
             opacity: 0.9;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
         
         .card-content {
@@ -303,19 +361,23 @@
         
         .card-date {
             color: var(--accent-red);
+            font-weight: 500;
         }
         
         .card-platform {
             background: var(--bg-primary);
-            color: #ff6666;
+            color: var(--accent-red);
             padding: 0.2rem 0.6rem;
             border-radius: 4px;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
         }
         
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
             line-height: 1.3;
+            font-weight: 600;
         }
         
         .card-excerpt {
@@ -335,28 +397,40 @@
         .read-time {
             color: var(--text-secondary);
             font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .read-time::before {
+            content: "\f017";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 400;
+            font-size: 0.8rem;
         }
         
         .card-button {
             background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
             text-decoration: none;
             font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(139, 0, 0, 0.3);
         }
         
         .card-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--dark-red), var(--accent-red));
         }
         
         .featured-writeup {
@@ -364,6 +438,17 @@
             display: flex;
             flex-direction: row;
             margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .featured-writeup::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-red), var(--dark-red));
         }
         
         .featured-writeup .card-image {
@@ -380,12 +465,14 @@
         .featured-badge {
             background: linear-gradient(45deg, var(--accent-red), var(--dark-red));
             color: white;
-            padding: 0.2rem 0.8rem;
+            padding: 0.3rem 1rem;
             border-radius: 15px;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: bold;
             display: inline-block;
             margin-bottom: 0.8rem;
+            align-self: flex-start;
+            box-shadow: 0 2px 10px rgba(139, 0, 0, 0.3);
         }
         
         .load-more {
@@ -402,15 +489,17 @@
             font-family: 'Courier New', monospace;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
         }
         
         .load-more-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--dark-red), var(--accent-red));
         }
         
         .no-results {
@@ -420,10 +509,22 @@
             color: var(--text-secondary);
         }
         
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-red);
+            opacity: 0.5;
+        }
+        
+        .no-results h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
         /* Footer */
         footer {
             background: #0a0000;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
             margin-top: 3rem;
             border-top: 1px solid var(--border-color);
@@ -438,18 +539,35 @@
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
         
         .footer-links a {
             color: #ff6666;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-red);
+            transition: width 0.3s ease;
         }
         
         .footer-links a:hover {
             color: var(--text-primary);
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
         }
         
         .copyright {
@@ -481,7 +599,35 @@
         .writeup-card:nth-child(5) { animation-delay: 0.5s; }
         .writeup-card:nth-child(6) { animation-delay: 0.6s; }
         
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark-red);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-red);
+        }
+        
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .writeups-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .writeups-container {
+                padding: 0 1.5rem 2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-container {
                 padding: 1rem;
@@ -493,8 +639,9 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--bg-primary);
+                background: rgba(10, 10, 10, 0.98);
                 border-top: 1px solid var(--border-color);
+                backdrop-filter: blur(10px);
             }
             
             nav.active {
@@ -504,7 +651,11 @@
             nav ul {
                 flex-direction: column;
                 padding: 1rem;
-                gap: 1rem;
+                gap: 0;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
             }
             
             .menu-toggle {
@@ -520,7 +671,7 @@
             }
             
             .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
+                transform: rotate(-45deg) translate(7px, -6px);
             }
             
             .writeup-card, .featured-writeup {
@@ -552,6 +703,37 @@
             .writeups-container {
                 padding: 0 1rem 2rem;
             }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .writeups-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .writeups-hero p {
+                font-size: 1rem;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .card-button {
+                align-self: stretch;
+                text-align: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -560,11 +742,11 @@
     <header>
         <div class="header-container">
             <div class="logo">KAMIKAZE<span>0x00</span></div>
-            <div class="menu-toggle">
+            <button class="menu-toggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
             <nav>
                 <ul>
                     <li><a href="index.html" class="nav-link">Home</a></li>
@@ -870,99 +1052,3 @@
                     }
                 } else if (noResults) {
                     noResults.remove();
-                }
-            }
-            
-            // Load more button functionality
-            const loadMoreBtn = document.getElementById('load-more');
-            // Sample data for additional writeups
-            const additionalWriteups = [
-                {
-                    platform: "TryHackMe",
-                    date: "2025-08-25",
-                    title: "TryHackMe - Basic Pentesting Walkthrough",
-                    excerpt: "Beginner-friendly walkthrough of the Basic Pentesting room on TryHackMe.",
-                    readTime: "8 min read",
-                    link: "https://yourblog.com/basic-pentesting"
-                },
-                {
-                    platform: "HackTheBox",
-                    date: "2025-08-20",
-                    title: "HackTheBox - Buff Writeup",
-                    excerpt: "Step-by-step guide to solving the Buff machine on HackTheBox with focus on Windows privilege escalation.",
-                    readTime: "16 min read",
-                    link: "https://yourblog.com/hackthebox-buff"
-                },
-                {
-                    platform: "CTF",
-                    date: "2025-08-15",
-                    title: "CTF Cryptography Challenges Guide",
-                    excerpt: "Comprehensive guide to solving various cryptography challenges in CTF competitions.",
-                    readTime: "22 min read",
-                    link: "https://yourblog.com/ctf-crypto-guide"
-                }
-            ];
-            
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', function() {
-                    this.innerHTML = 'Loading... <i class="fas fa-circle-notch fa-spin"></i>';
-                    
-                    // Simulate loading more content
-                    setTimeout(() => {
-                        // Add additional writeups
-                        additionalWriteups.forEach((writeup, index) => {
-                            const article = document.createElement('article');
-                            article.className = 'writeup-card';
-                            article.setAttribute('data-platform', writeup.platform);
-                            article.style.animationDelay = `${0.1 + (index * 0.1)}s`;
-                            
-                            // Determine icon based on platform
-                            let iconClass = 'fas fa-terminal';
-                            if (writeup.platform === 'TryHackMe') iconClass = 'fas fa-star';
-                            if (writeup.platform === 'HackTheBox') iconClass = 'fas fa-cube';
-                            
-                            article.innerHTML = `
-                                <div class="card-image">
-                                    <i class="${iconClass}"></i>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-meta">
-                                        <span class="card-date">${writeup.date}</span>
-                                        <span class="card-platform">${writeup.platform}</span>
-                                    </div>
-                                    <h2 class="card-title">${writeup.title}</h2>
-                                    <p class="card-excerpt">${writeup.excerpt}</p>
-                                    <div class="card-actions">
-                                        <span class="read-time">${writeup.readTime}</span>
-                                        <a href="${writeup.link}" class="card-button">
-                                            Read <i class="fas fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            writeupsGrid.appendChild(article);
-                        });
-                        
-                        this.innerHTML = 'No More Writeups <i class="fas fa-check"></i>';
-                        this.disabled = true;
-                    }, 1500);
-                });
-            }
-            
-            // Set active navigation link based on current page
-            const currentPage = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
