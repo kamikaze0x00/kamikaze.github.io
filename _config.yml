@@ -1,0 +1,10 @@
+title: "Your Blog Title"
+description: "CTF writeups and security tutorials"
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
