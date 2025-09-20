@@ -1,6 +1,29 @@
-<style>
-    /* Enhanced Writeups Page Styles */
-    body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writeups - Kamikaze0x00</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #151520;
+            --accent-red: #ff2a6d;
+            --dark-red: #d100d1;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0c0;
+            --border-color: #2a2a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
         background-color: #000000; /* Pure black background */
         color: #ffffff;
         position: relative;
@@ -413,4 +436,416 @@
             font-size: 0.9rem;
         }
     }
-</style>
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">KAMIKAZE<span>0x00</span></div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="writeups.html" class="nav-link active">Writeups</a></li>
+                    <li><a href="categories.html" class="nav-link">Categories</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="writeups-hero">
+        <h1>CTF Writeups</h1>
+        <p>Detailed solutions and walkthroughs for various Capture The Flag challenges</p>
+        <div class="search-box">
+            <input type="text" class="search-input" id="search-input" placeholder="Search writeups...">
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="writeups-container">
+        <div class="filter-section">
+            <div class="filter-tags">
+                <div class="filter-tag active" data-filter="all">All</div>
+                <div class="filter-tag" data-filter="TryHackMe">TryHackMe</div>
+                <div class="filter-tag" data-filter="HackTheBox">HackTheBox</div>
+                <div class="filter-tag" data-filter="Web">Web</div>
+                <div class="filter-tag" data-filter="Forensics">Forensics</div>
+            </div>
+            
+            <div class="view-options">
+                <div class="view-option" data-view="grid">
+                    <i class="fas fa-grip-horizontal"></i>
+                </div>
+                <div class="view-option active" data-view="list">
+                    <i class="fas fa-list"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="writeups-grid" id="writeups-grid">
+            <!-- Featured Writeup -->
+            <article class="writeup-card featured-writeup" data-platform="TryHackMe">
+                <div class="card-image">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="featured-content">
+                    <span class="featured-badge">FEATURED</span>
+                    <div class="card-meta">
+                        <span class="card-date">2025-09-15</span>
+                        <span class="card-platform">TryHackMe</span>
+                    </div>
+                    <h2 class="card-title">TryHackMe - Blog CTF Complete Walkthrough</h2>
+                    <p class="card-excerpt">A detailed walkthrough of the Blog CTF room on TryHackMe, covering enumeration, exploitation, and privilege escalation techniques with advanced vulnerability chaining.</p>
+                    <div class="card-actions">
+                        <span class="read-time">15 min read</span>
+                        <a href="https://yourblog.com/tryhackme-blog-ctf" class="card-button">
+                            Read Writeup <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Regular Writeups -->
+            <article class="writeup-card" data-platform="HackTheBox">
+                <div class="card-image">
+                    <i class="fas fa-terminal"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-date">2025-09-12</span>
+                        <span class="card-platform">HackTheBox</span>
+                    </div>
+                    <h2 class="card-title">HackTheBox - Academy Writeup</h2>
+                    <p class="card-excerpt">Step-by-step guide to solving the Academy machine on HackTheBox with detailed privilege escalation path.</p>
+                    <div class="card-actions">
+                        <span class="read-time">12 min read</span>
+                        <a href="https://yourblog.com/hackthebox-academy" class="card-button">
+                            Read <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="writeup-card" data-platform="CTF">
+                <div class="card-image">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-date">2025-09-08</span>
+                        <span class="card-platform">CTF</span>
+                    </div>
+                    <h2 class="card-title">Buffer Overflow Exploitation Guide</h2>
+                    <p class="card-excerpt">Comprehensive guide to buffer overflow vulnerabilities and exploitation techniques for modern binaries.</p>
+                    <div class="card-actions">
+                        <span class="read-time">20 min read</span>
+                        <a href="https://yourblog.com/buffer-overflow-guide" class="card-button">
+                            Read <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="writeup-card" data-platform="Web">
+                <div class="card-image">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-date">2025-09-05</span>
+                        <span class="card-platform">Web</span>
+                    </div>
+                    <h2 class="card-title">SQL Injection Mastery</h2>
+                    <p class="card-excerpt">Advanced SQL injection techniques for CTF challenges and bug bounty hunting with real-world examples.</p>
+                    <div class="card-actions">
+                        <span class="read-time">14 min read</span>
+                        <a href="https://yourblog.com/sql-injection-mastery" class="card-button">
+                            Read <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="writeup-card" data-platform="Forensics">
+                <div class="card-image">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-date">2025-09-01</span>
+                        <span class="card-platform">Forensics</span>
+                    </div>
+                    <h2 class="card-title">Network Forensics Analysis</h2>
+                    <p class="card-excerpt">Analyzing network traffic captures for CTF forensics challenges and identifying malicious activity.</p>
+                    <div class="card-actions">
+                        <span class="read-time">10 min read</span>
+                        <a href="https://yourblog.com/network-forensics" class="card-button">
+                            Read <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="writeup-card" data-platform="Linux">
+                <div class="card-image">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-date">2025-08-28</span>
+                        <span class="card-platform">Linux</span>
+                    </div>
+                    <h2 class="card-title">Linux Privilege Escalation Techniques</h2>
+                    <p class="card-excerpt">Comprehensive guide to Linux privilege escalation methods for CTFs and penetration testing.</p>
+                    <div class="card-actions">
+                        <span class="read-time">18 min read</span>
+                        <a href="https://yourblog.com/linux-privesc" class="card-button">
+                            Read <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="load-more">
+            <button class="load-more-button" id="load-more">
+                Load More Writeups <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="writeups.html">Writeups</a>
+                <a href="categories.html">Categories</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Kamikaze0x00. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    if (nav) {
+                        nav.classList.toggle('active');
+                    }
+                });
+            }
+            
+            // Filter tags functionality
+            const filterTags = document.querySelectorAll('.filter-tag');
+            let activeFilter = 'all';
+            
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const filterValue = this.getAttribute('data-filter');
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilter = filterValue;
+                    filterWriteups();
+                });
+            });
+            
+            // View options functionality
+            const viewOptions = document.querySelectorAll('.view-option');
+            const writeupsGrid = document.getElementById('writeups-grid');
+            
+            viewOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const viewType = this.getAttribute('data-view');
+                    viewOptions.forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (viewType === 'grid') {
+                        writeupsGrid.classList.remove('list-view');
+                        writeupsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+                        document.querySelectorAll('.writeup-card').forEach(card => {
+                            card.style.flexDirection = 'column';
+                        });
+                        document.querySelectorAll('.card-image').forEach(image => {
+                            image.style.width = '100%';
+                            image.style.height = '150px';
+                        });
+                    } else {
+                        writeupsGrid.classList.add('list-view');
+                        writeupsGrid.style.gridTemplateColumns = '1fr';
+                        document.querySelectorAll('.writeup-card').forEach(card => {
+                            if (!card.classList.contains('featured-writeup')) {
+                                card.style.flexDirection = 'row';
+                            }
+                        });
+                        document.querySelectorAll('.card-image').forEach(image => {
+                            image.style.width = '120px';
+                            image.style.height = '120px';
+                        });
+                    }
+                });
+            });
+            
+            // Set list view as default
+            writeupsGrid.classList.add('list-view');
+            
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', function() {
+                filterWriteups();
+            });
+            
+            // Filter writeups based on active filter and search term
+            function filterWriteups() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const writeupCards = document.querySelectorAll('.writeup-card');
+                let visibleCount = 0;
+                
+                writeupCards.forEach(card => {
+                    const platform = card.getAttribute('data-platform');
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
+                    
+                    // Check if card matches filter
+                    const matchesFilter = activeFilter === 'all' || platform === activeFilter;
+                    
+                    // Check if card matches search term
+                    const matchesSearch = searchTerm === '' || 
+                        title.includes(searchTerm) || 
+                        excerpt.includes(searchTerm);
+                    
+                    // Show or hide card based on filters
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show no results message if needed
+                let noResults = document.getElementById('no-results');
+                if (visibleCount === 0) {
+                    if (!noResults) {
+                        noResults = document.createElement('div');
+                        noResults.id = 'no-results';
+                        noResults.className = 'no-results';
+                        noResults.innerHTML = '<i class="fas fa-search fa-2x"></i><h3>No writeups found</h3><p>Try adjusting your search or filter criteria</p>';
+                        writeupsGrid.appendChild(noResults);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            }
+            
+            // Load more button functionality
+            const loadMoreBtn = document.getElementById('load-more');
+            // Sample data for additional writeups
+            const additionalWriteups = [
+                {
+                    platform: "TryHackMe",
+                    date: "2025-08-25",
+                    title: "TryHackMe - Basic Pentesting Walkthrough",
+                    excerpt: "Beginner-friendly walkthrough of the Basic Pentesting room on TryHackMe.",
+                    readTime: "8 min read",
+                    link: "https://yourblog.com/basic-pentesting"
+                },
+                {
+                    platform: "HackTheBox",
+                    date: "2025-08-20",
+                    title: "HackTheBox - Buff Writeup",
+                    excerpt: "Step-by-step guide to solving the Buff machine on HackTheBox with focus on Windows privilege escalation.",
+                    readTime: "16 min read",
+                    link: "https://yourblog.com/hackthebox-buff"
+                },
+                {
+                    platform: "CTF",
+                    date: "2025-08-15",
+                    title: "CTF Cryptography Challenges Guide",
+                    excerpt: "Comprehensive guide to solving various cryptography challenges in CTF competitions.",
+                    readTime: "22 min read",
+                    link: "https://yourblog.com/ctf-crypto-guide"
+                }
+            ];
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    this.innerHTML = 'Loading... <i class="fas fa-circle-notch fa-spin"></i>';
+                    
+                    // Simulate loading more content
+                    setTimeout(() => {
+                        // Add additional writeups
+                        additionalWriteups.forEach((writeup, index) => {
+                            const article = document.createElement('article');
+                            article.className = 'writeup-card';
+                            article.setAttribute('data-platform', writeup.platform);
+                            article.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+                            
+                            // Determine icon based on platform
+                            let iconClass = 'fas fa-terminal';
+                            if (writeup.platform === 'TryHackMe') iconClass = 'fas fa-star';
+                            if (writeup.platform === 'HackTheBox') iconClass = 'fas fa-cube';
+                            
+                            article.innerHTML = `
+                                <div class="card-image">
+                                    <i class="${iconClass}"></i>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-meta">
+                                        <span class="card-date">${writeup.date}</span>
+                                        <span class="card-platform">${writeup.platform}</span>
+                                    </div>
+                                    <h2 class="card-title">${writeup.title}</h2>
+                                    <p class="card-excerpt">${writeup.excerpt}</p>
+                                    <div class="card-actions">
+                                        <span class="read-time">${writeup.readTime}</span>
+                                        <a href="${writeup.link}" class="card-button">
+                                            Read <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            writeupsGrid.appendChild(article);
+                        });
+                        
+                        this.innerHTML = 'No More Writeups <i class="fas fa-check"></i>';
+                        this.disabled = true;
+                    }, 1500);
+                });
+            }
+            
+            // Set active navigation link based on current page
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
